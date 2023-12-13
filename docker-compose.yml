@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  estrata_gemas:
+    build: .
+    image: estrata_gemas
+    tty: true
+    ports:
+      - 9292:9292
+    volumes:
+      - .:/opt/app-root/src
