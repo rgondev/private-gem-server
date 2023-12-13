@@ -4,7 +4,5 @@ services:
     build: .
     image: estrata_gemas
     tty: true
-    ports:
-      - 9292:9292
     volumes:
       - .:/opt/app-root/src
