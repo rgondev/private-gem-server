@@ -52,24 +52,29 @@ Una vez levantado el contenedor se puede acceder al servidor de gemas en la URL 
 
 Podemos modificar el puerto de salida del servidor de gemas en el fichero `docker-compose.dev.yml` por otro de nuestro gusto.
 
-# (Opcional) Basic Auth
+### Basic Auth
+Para bloquear accesos indevidos podemos añadir al servidor una autenticación HTTP básica a nuestro servidor de gemas.
+Se configura en el fichero `config.ru` y a través de las variables `HTTP_BASIC_AUTH_USERNAME` y `HTTP_BASIC_AUTH_PASSWORD` del fichero `docker-compose.dev.yml` 
 
-# Como se sube una gema
+### Como se sube una gema
 Para subir una gema utilizamos la interfaz web. Hacemos clic en la portada en el enlace `Upload another gem` y nos llevará a un formulario para subir un fichero con formato `.gem`
 
 ![](upload.png)
 
 Una vez subida la gema en el backoffice del servidor de gemas se mostraran las gemas contenidas en nuestro servidor
 
-# Como se consume una gema de nuestro servidor
+### Como se consume una gema de nuestro servidor
 
 En el proyecto destino donde queremos usar nuestro servidor de gemas, debemos añadir las siguientes lineas al fichero de `Gemfile`
 
 ```
-source 'https://host.docker.internal:9292'
+source 'https://localhost:9292'
 
 gem `my_hosted_gem`
 ```
+
+Usaremos 'https://host.docker.internal:9292/ para instalaciones dockerizadas que se comunican a través de la red de Docker
+Usaremos 'http://admin:admin@host.docker.internal:9292' para instalaciones con Basic Auth
 
 ### Comandos
 Puedes usar los comandos que se encuentra en el Makefile
