@@ -35,24 +35,49 @@ otros desarrolladores.
 * <https://www.geeksforgeeks.org/running-a-ruby-application-using-docker/>
 
 
-### Instalación
-Puedes usar los comandos que se encuentra en el makefile
+### Descripción
+Servidor de gemas de Ruby
 
-make build: Para contruir el contenedor.
-Make up: para levantarlo.
+Este servidor se ha montado con la gema [geminabox](https://github.com/geminabox/geminabox) en una instalación dockerizada a través de docker-compose.
 
-Esto hará que se instale el proyecto [geminabox](https://github.com/geminabox/geminabox). Si accedes al http://localhost:9292 accedera el servicio de geminabox. Geminabox tiene una interfaz web para meter la gema compilada`money_formatter_gem-0.1.0.gem`.
+Para arrancar el proyecto ejecutamos los siguientes comandos
 
-1. Nota: geminabox también posee comando para subir la gema. Pero con la interfaz nos ha parecido suficiente.
-2. Nota: Hemos importado esta gema en Apitol como ejemplo:
-    * En el Gemfile con poner:
-    ```=ruby
-   source 'http://localhost:9292'
-   gem money_formatter_gem
-   ```
-    * Bundle install
+```
+make build && make up
+```
 
-Conseguimos que se no instalara.
+Una vez levantado el contenedor se puede acceder al servidor de gemas en la URL http://localhost:9292.
+
+![](backoffice.png)
+
+Podemos modificar el puerto de salida del servidor de gemas en el fichero `docker-compose.dev.yml` por otro de nuestro gusto.
+
+# (Opcional) Basic Auth
+
+# Como se sube una gema
+Para subir una gema utilizamos la interfaz web. Hacemos clic en la portada en el enlace `Upload another gem` y nos llevará a un formulario para subir un fichero con formato `.gem`
+
+![](upload.png)
+
+Una vez subida la gema en el backoffice del servidor de gemas se mostraran las gemas contenidas en nuestro servidor
+
+# Como se consume una gema de nuestro servidor
+
+En el proyecto destino donde queremos usar nuestro servidor de gemas, debemos añadir las siguientes lineas al fichero de `Gemfile`
+
+```
+source 'https://host.docker.internal:9292'
+
+gem `my_hosted_gem`
+```
+
+### Comandos
+Puedes usar los comandos que se encuentra en el Makefile
+
+`make build`: Contrucción de la imagen.  
+`make up`: Levantar el contenedor con la aplicación del servidor de gemas.  
+`make down`: Parar el contenedor con la aplicación del servidor de gemas.  
+`make shell`: Navegación en una bash dentro del contenedor.  
 
 ## Nivel 2: Desplegar el servidor de gemas en OpenShift
 
