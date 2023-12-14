@@ -12,4 +12,9 @@ Geminabox.data = "/opt/app-root/src/data" # ... or wherever
 use Rack::Session::Pool, expire_after: 1000 # sec
 use Rack::Protection
 
+# Comment this lanes to skip Basic Auth
+use Rack::Auth::Basic, "GemInAbox" do |username, password|
+  ENV['HTTP_BASIC_AUTH_USERNAME'] == username && ENV['HTTP_BASIC_AUTH_PASSWORD'] == password
+end
+
 run Geminabox::Server

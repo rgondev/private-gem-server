@@ -3,3 +3,6 @@ services:
   estrata_gemas:
     ports:
       - 9292:9292
+    environment:
+      - HTTP_BASIC_AUTH_USERNAME=admin
+      - HTTP_BASIC_AUTH_PASSWORD=admin
