@@ -1,8 +1,8 @@
 FROM ubi8/ruby-30
 
 USER 0
-RUN gem install bundler:1.17.2
 RUN bundle update --bundler
+RUN gem install bundler:1.17.2
 
 ADD Gemfile Gemfile.lock config.ru data/ ./
 RUN bundle install --path ./bundle
