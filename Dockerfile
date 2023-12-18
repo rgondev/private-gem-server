@@ -1,12 +1,7 @@
-FROM ruby:3.1
+FROM ubi8/ruby-30
 
-RUN apt-get update -qq && apt-get install -y cmake
-WORKDIR /opt/app-root/src/
+USER 0
+ADD Gemfile Gemfile.lock config.ru data/ ./
+RUN bundle install --path ./bundle
 
-RUN gem install bundler
-COPY Gemfile Gemfile.lock config.ru data/ /opt/app-root/src/
-
-RUN bundle install
-
-EXPOSE 9292
-CMD ["rackup", "--host", "0.0.0.0"]
+CMD bundle exec "rackup -P /tmp/rack.pid --host 0.0.0.0 --port 9292"
