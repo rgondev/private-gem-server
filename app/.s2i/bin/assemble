@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# The assemble script builds the application artifacts from source and
+# places them into appropriate directories inside the image.
+
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
+ echo "Restoring build artifacts"
+ mv /tmp/artifacts/* $HOME/.
+fi
+
+echo "---> Updating bundler gem..."
+gem install bundler -v 1.17.3
+
+Execute the default S2I script
+source ${STI_SCRIPTS_PATH}/assemble

@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+pushd ${HOME} >/dev/null
+
+if [ -d ./bundle/ruby -a -f ${APP_ROOT}/src/Gemfile.lock ]; then
+  tar cf - bundle/ruby ${APP_ROOT}/src/Gemfile.lock
+fi
+
+popd >/dev/null
