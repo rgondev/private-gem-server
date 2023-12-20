@@ -2,4 +2,3 @@ source 'https://rubygems.org'
 
 gem 'geminabox'
 gem 'puma'
-gem 'rack'
