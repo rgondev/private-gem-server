@@ -10,5 +10,9 @@ fi
 echo "---> Updating bundler gem..."
 gem install bundler -v 1.17.3
 
+
+echo "---> Updating rack gem..."
+gem install rack
+
 # Execute the default S2I script
 source ${STI_SCRIPTS_PATH}/assemble
